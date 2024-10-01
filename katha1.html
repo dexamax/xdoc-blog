@@ -113,95 +113,67 @@
     </div>
 
     <script>
-    // Wait for the DOM content to load
-    document.addEventListener("DOMContentLoaded", function() {
-        // Create a wrapper div for centering
-        var wrapperDiv = document.createElement("div");
-        wrapperDiv.style.textAlign = "center";  // This will center the content
-
-        // Create a text element
-        var infoText = document.createElement("p");
-        infoText.innerHTML = "පහල තියෙන කොල පාට බටන් එක ඔබන්න. වෙන පිටු වලට ගියොත් නැවත උත්සහ කරන්න";
-        infoText.style.fontWeight = "bold";  // Optional: make the text bold
-
-        // Create the button
-        var generateBtn = document.createElement("button");
-        generateBtn.innerHTML = "කතාව පෙන්වන්න";
-        generateBtn.style.backgroundColor = "#4CAF50";
-        generateBtn.style.color = "white";
-        generateBtn.style.padding = "10px 20px";
-        generateBtn.style.border = "none";
-        generateBtn.style.borderRadius = "5px";
-        generateBtn.style.cursor = "pointer";
-        generateBtn.id = "generateBtn";
-
-        // Append text and button to the wrapper div
-        wrapperDiv.appendChild(infoText);
-        wrapperDiv.appendChild(generateBtn);
-
-        // Insert the wrapper div at the top of the article
-        var articleContainer = document.querySelector('.post-body'); // Assuming your article content is in .post-body
-        if (articleContainer) {
-            articleContainer.parentNode.insertBefore(wrapperDiv, articleContainer);  // Insert the wrapper with text and button
-
-            // Hide the article content initially
-            articleContainer.style.display = "none";
-
-            // Function to show the article and hide the button and text
-            generateBtn.addEventListener("click", function() {
-                generateBtn.style.display = "none"; // Hide the button
-                infoText.style.display = "none"; // Hide the info text
-                articleContainer.style.display = "block"; // Show the article content
-            });
+        // Wait for the DOM content to load
+        document.addEventListener("DOMContentLoaded", function() {
+            // Create a wrapper div for centering
+            var wrapperDiv = document.createElement("div");
+            wrapperDiv.style.textAlign = "center";  // This will center the content
+    
+            // Create a text element
+            var infoText = document.createElement("p");
+            infoText.innerHTML = "පහල තියෙන කොල පාට බටන් එක ඔබන්න. වෙන පිටු වලට ගියොත් නැවත උත්සහ කරන්න";
+            infoText.style.fontWeight = "bold";  // Optional: make the text bold
+    
+            // Create the button
+            var generateBtn = document.createElement("button");
+            generateBtn.innerHTML = "කතාව පෙන්වන්න";
+            generateBtn.style.backgroundColor = "#4CAF50";
+            generateBtn.style.color = "white";
+            generateBtn.style.padding = "10px 20px";
+            generateBtn.style.border = "none";
+            generateBtn.style.borderRadius = "5px";
+            generateBtn.style.cursor = "pointer";
+            generateBtn.id = "generateBtn";
+    
+            // Append text and button to the wrapper div
+            wrapperDiv.appendChild(infoText);
+            wrapperDiv.appendChild(generateBtn);
+    
+            // Insert the wrapper div at the top of the article
+            var articleContainer = document.querySelector('.post-body'); // Assuming your article content is in .post-body
+            if (articleContainer) {
+                articleContainer.parentNode.insertBefore(wrapperDiv, articleContainer);  // Insert the wrapper with text and button
+    
+                // Hide the article content initially
+                articleContainer.style.display = "none";
+    
+                // Function to show the article and hide the button and text
+                generateBtn.addEventListener("click", function() {
+                    generateBtn.style.display = "none"; // Hide the button
+                    infoText.style.display = "none"; // Hide the info text
+                    articleContainer.style.display = "block"; // Show the article content
+                });
+            }
+        });
+    
+        // Variables to track clicks
+        let clickCount = 0; // Initialize click count
+    
+        // Function to handle clicks
+        function handleClick() {
+            clickCount++; // Increment the click count
         }
-    });
-
-    // Variables to track clicks and time
-    let clickCount = 0; // Initialize click count
-    const redirectUrl = 'https://noohapou.com/4/7939569'; // Set the redirect link
-    let lastRedirectTime = localStorage.getItem('lastRedirectTime');
-
-    // Function to check if the redirect can happen
-    function canRedirect() {
-        const now = new Date().getTime();
-        const twoMinutesLater = lastRedirectTime ? (parseInt(lastRedirectTime) + 2 * 60 * 1000) : 0;
-        return clickCount >= 2 && now >= twoMinutesLater; // Allow redirect if click count is 2 or more and 2 minutes have passed
-    }
-
-    // Function to handle clicks
-    function handleClick() {
-        clickCount++; // Increment the click count
-        if (canRedirect()) {
-            handleRedirect(); // Trigger redirect if conditions are met
-            resetClickCount(); // Reset click count
-        }
-    }
-
-    // Function to handle the redirect
-    function handleRedirect() {
-        // Redirect to the provided URL
-        window.location.href = redirectUrl;
-        // Update the last redirect time in localStorage
-        lastRedirectTime = new Date().getTime();
-        localStorage.setItem('lastRedirectTime', lastRedirectTime);
-    }
-
-    // Function to reset click count after redirect
-    function resetClickCount() {
-        clickCount = 0; // Reset the click count to zero
-    }
-
-    // Add an event listener for clicks anywhere on the page
-    document.addEventListener('click', function(event) {
-        // Prevent redirect if clicking on the button or info text
-        if (event.target !== generateBtn && event.target !== infoText) {
-            handleClick(); // Count every click on the page, except on button or info text
-        }
-    });
-</script>
-
-      
-      
+    
+        // Add an event listener for clicks anywhere on the page
+        document.addEventListener('click', function(event) {
+            // Prevent counting clicks on the button or info text
+            if (event.target !== generateBtn && event.target !== infoText) {
+                handleClick(); // Count every click on the page, except on button or info text
+            }
+        });
+    </script>
+    
+    <script src="script.js"></script>
       
 </body>
 </html>
